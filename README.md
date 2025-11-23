@@ -1,6 +1,6 @@
-🌾 Chatbot Agritec (v5.2 - Estável e Integrado com Gemini)
+🌾 Chatbot AgroAssist (v5.2 - Estável e Integrado com Gemini)
 
-O projeto Chatbot Agritec tem como objetivo oferecer suporte prático e inteligente a agricultores, integrando informações oficiais de diversas APIs da Embrapa (como Agritec, ClimAPI, Agrofit e RespondeAgro) a um assistente conversacional avançado, utilizando o modelo Gemini 2.5 Flash para processamento final da resposta.
+O projeto Chatbot AgroAssist tem como objetivo oferecer suporte prático e inteligente a agricultores, integrando informações oficiais de diversas APIs da Embrapa (como Agritec, ClimAPI, Agrofit e RespondeAgro) a um assistente conversacional avançado, utilizando o modelo Gemini 2.5 Flash para processamento final da resposta.
 
 A versão atual (v5.2 - Estável e Integrado com Gemini) representa um salto na capacidade de resposta e utilidade do assistente.
 
