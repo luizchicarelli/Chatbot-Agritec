@@ -1,0 +1,94 @@
+*DOCUMENTAÇÃO TÉCNICA: AGRO ASSIST*
+
+*Versão:* 5.2 (Stable & Integrated)
+*Status:* Protótipo Funcional
+
+*1. VISÃO GERAL DO PROJETO*
+
+O Agro Assist é um assistente virtual inteligente desenvolvido para democratizar o acesso à informação técnica no campo. O sistema atua como um centralizador que conecta o agricultor diretamente às bases de dados oficiais da Embrapa, utilizando Inteligência Artificial Generativa (Google Gemini) para interpretar, resumir e traduzir dados técnicos brutos para uma linguagem natural e acessível.
+
+*O Problema Resolvido*
+Agricultores frequentemente dependem de consultas manuais complexas em diversos sites ou de técnicos presenciais para obter informações básicas sobre plantio e defensivos. O Agro Assist automatiza esse processo via chat, oferecendo respostas imediatas.
+
+*2. ARQUITETURA E TECNOLOGIAS*
+
+O projeto é construído sobre uma arquitetura híbrida que combina programação tradicional com IA moderna:
+
+1. Backend Lógico (Python): Gerencia o fluxo de conversa e as requisições de rede.
+2. APIs Oficiais (Dados): Busca dados exatos nos servidores da Embrapa, garantindo que não haja invenção de informações.
+3. Camada de Inteligência (NLP + GenAI):
+   • spaCy: Realiza o reconhecimento de entidades no texto (identifica cidades, nomes de culturas e datas).
+   • Google Gemini (Modelo 2.5 Flash): Realiza o tratamento final da resposta, convertendo tabelas técnicas em explicações amigáveis.
+
+*Lista de Tecnologias Utilizadas:*
+• Linguagem Principal: Python 3.x
+• Processamento de Linguagem Natural: spaCy (Modelo: pt_core_news_sm)
+• Modelo de Linguagem (LLM): google-generativeai
+• Requisições HTTP: Requests
+• Visualização de Dados: Tabulate
+
+*3. INTEGRAÇÕES (APIs DA EMBRAPA)*
+
+O sistema integra 5 módulos distintos da Embrapa e serviços auxiliares:
+
+• Agritec (V2): Responsável pela consulta de zoneamento agrícola (ZARC), melhores épocas de plantio, lista de cultivares adaptadas e estimativa de produtividade.
+• Agrofit: Banco de dados oficial de defensivos agrícolas para controle de pragas e doenças.
+• ClimAPI: Fornece dados meteorológicos baseados em coordenadas geográficas.
+• RespondeAgro: Base de conhecimento para perguntas e respostas gerais.
+• SmartSolos (Experimental): Módulo destinado à classificação taxonômica de solos.
+• Nominatim (OSM): Serviço de geocodificação que converte nomes de cidades em Latitude e Longitude para as consultas climáticas.
+
+*4. GUIA DE INSTALAÇÃO E CONFIGURAÇÃO*
+
+Para executar o projeto em um novo ambiente, siga os passos abaixo:
+
+Passo 1: Pré-requisitos
+É necessário ter o Python instalado na máquina e uma conexão ativa com a internet para a validação dos tokens e consultas em tempo real.
+
+Passo 2: Instalação das Dependências
+No terminal de comando, deve-se instalar as bibliotecas listadas no projeto:
+Comando: pip install requests spacy tabulate google-genai
+
+Em seguida, é necessário baixar o dicionário de língua portuguesa para o processamento de texto:
+Comando: python -m spacy download pt_core_news_sm
+
+Passo 3: Configuração de Chaves (API Keys)
+Para garantir a segurança e o funcionamento, é necessário inserir as credenciais no código fonte (arquivo principal):
+• Chave da API do Google Gemini.
+• Tokens de acesso da Embrapa (Consumer Key e Secret).
+
+*5. MANUAL DE USO (FUNCIONALIDADES)*
+
+O Chatbot foi desenhado para entender linguagem natural. Abaixo estão as principais funcionalidades que o usuário pode solicitar:
+
+*A. Zoneamento e Plantio*
+Função: Verifica a janela ideal de plantio para evitar riscos climáticos.
+Exemplo de pergunta: "Quando plantar milho em Piracicaba?"
+
+*B. Cultivares*
+Função: Lista variedades de sementes registradas para um estado específico.
+Exemplo de pergunta: "Quais as cultivares de soja para o Rio Grande do Sul?"
+
+*C. Clima e Tempo*
+Função: Retorna dados meteorológicos atuais da região solicitada.
+Exemplo de pergunta: "Como está o clima em Marília?"
+
+*D. Controle de Pragas e Defensivos*
+Função: Consulta a bula oficial de produtos registrados no Agrofit e identifica pragas.
+Exemplo 1: "Qual fungicida usar para ferrugem asiática?"
+Exemplo 2: "O que é a lagarta do cartucho?"
+
+*E. Estimativa de Produtividade*
+Função: Calcula o rendimento esperado baseado na data de plantio.
+Exemplo de pergunta: "Produtividade de soja em Porto Alegre plantando dia 01/11/2024"
+
+*6. LÓGICA DE AUTONOMIA (FALLBACK)*
+
+O sistema possui uma lógica de segurança robusta chamada "Autonomia Gemini". Caso a API da Embrapa esteja fora do ar ou não retorne dados específicos para uma consulta complexa, o sistema aciona automaticamente a Inteligência Artificial.
+
+O modelo utiliza seu conhecimento pré-treinado em agronomia para não deixar o usuário sem resposta, mas emite um alerta informando que aquela resposta específica foi gerada por IA e não consultada na base oficial naquele momento.
+
+*7. EQUIPE*
+
+Responsável pela Documentação: Felipe Augusto
+Responsáveis pelo Projeto desenvolvido pelo grupo Agro Assist:
